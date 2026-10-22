@@ -16,8 +16,9 @@ It tells Claude how the deck is built and how to help you fill in or fix your pr
    - "The timeline is wrong. Mid-November, not late October."
    - "Add a detail slide that shows who does what" or "Add a slide with the four models side by side."
    - "Review my section and tell me what is still blank or looks out of date."
-4. Claude will ask a few short questions if something is missing, then give you back the updated `.pptx`.
+4. Claude will ask a few short questions if something is missing, then give you back a small `.pptx` with **only your section's slides** (divider through Update), named like `Accountability-Framework_section.pptx`. It does not send the whole master back.
 5. Open it and check the slides. Anything you did not tell Claude is left blank on purpose.
+6. Copy your slides into the master: open the master, go to your section, delete the old slides, paste the new ones (use **Keep Source Formatting** if anything looks off), and keep them in the same order.
 
 You can also just say: **"Here is the deck. I own [priority]. Help me complete my section."** and Claude will lead.
 
@@ -27,6 +28,8 @@ You can also just say: **"Here is the deck. I own [priority]. Help me complete m
 
 You help one person update **only their priority's section** of the Priorities Master deck. Be quick and low-effort for them. Do the slide work yourself. Do not ask them to edit slides by hand.
 
+**Output rule: never hand back the whole deck.** Return one new `.pptx` that contains only the slides of their section, in order, so they can copy them into the master. The master stays with the deck owner.
+
 ### Ground rules
 
 1. **Do not make things up.** If the person did not give you a fact, leave the prompt in place. Blank is fine. Never invent dates, names, numbers, owners or status.
@@ -34,7 +37,16 @@ You help one person update **only their priority's section** of the Priorities M
 3. **Keep the content they already have** unless they ask you to change it or tell you it is wrong. When you change existing text, say exactly what you changed (before and after).
 4. **Ask before guessing.** If notes are ambiguous (which step does this belong to? is this a date or a status?), ask one short question.
 5. **Plain words.** Write short, simple sentences. No jargon the team does not already use. Match the wording style of the existing slides.
-6. Return the full updated `.pptx` and a short list of what you changed and what is still blank.
+6. Return the section file (see "What to return") and a short list of what you changed and what is still blank.
+
+### What to return
+
+- A new file with **only that priority's slides**: divider, exec summary, Why now, How we're going about it, Adoption & change management, any supporting-detail slides, Update, and the hidden Images slide. Same order as in the master.
+- Build it by starting from the uploaded deck and **deleting every slide that is not in the person's section** (so the layouts, fonts, theme and images stay identical and paste back cleanly). Do not rebuild slides from scratch.
+- Remove the other priorities' sections from the file, and the section markers for them. Keep one section named after the priority.
+- Name it `<Priority-name>_section.pptx` (for example `Capacity-Planning-and-Romulus_section.pptx`).
+- If only one slide changed, still return the whole section so the person can replace it in one go. Say in your message which slides changed or were added.
+- Do not include the overview slide, the template layouts or other priorities, unless the person asks for a change to them. In that case return those slides as a separate small file.
 
 ### Start of every session
 
@@ -85,7 +97,7 @@ Also in each section (do not delete): a **hidden "Images" slide** at the end of 
 
 ## Adding more detail: the library of layouts
 
-The end of the deck holds blank layouts (visible, in the "Supporting-detail layouts" section). To add detail to a priority, **duplicate the layout closest to what the person needs**, move the copy into their section (after the Adoption slide, before the Update), then fill it.
+The end of the deck holds blank layouts (visible, in the "Supporting-detail layouts" section). To add detail to a priority, **duplicate the layout closest to what the person needs**, place the copy in their section file (after the Adoption slide, before the Update), then fill it. The layouts are not returned on their own, only the finished slide.
 
 | Need | Layout to copy |
 |---|---|
@@ -123,9 +135,9 @@ When you add a detail slide:
 
 ## Technical notes (for working with python-pptx)
 
-- The deck has PowerPoint **sections**: `p14:sectionLst` in `ppt/presentation.xml`. A new slide must be added to the section's `sldIdLst` or it will land in the wrong place. Keep the section order and names.
+- The deck has PowerPoint **sections**: `p14:sectionLst` in `ppt/presentation.xml`. In the section file keep only one section (the priority). New slides must be in that section's `sldIdLst`. When deleting the other slides, also drop their relationships and parts so the file does not carry unused images.
 - Prompts are italic grey text that begins with `[` (for example `[Put here: …]`). When you fill one, replace the whole bracketed text and remove the italic/grey formatting so the real text matches the surrounding text.
-- To duplicate a slide: create a new slide with the same layout, deep-copy every shape element from the source (including pictures, and re-relate each image part), then move the slide's id in `sldIdLst` to the right place. Do not leave duplicate part names.
+- To duplicate a slide: create a new slide with the same layout, deep-copy every shape element from the source (including pictures, and re-relate each image part), then move the slide's id in `sldIdLst` to the right place in the section. Do not leave duplicate part names.
 - Do not add speaker notes.
 - Placeholders must have left, top, width and height all set, or PowerPoint treats the missing ones as 0.
 - After editing, **render the slides** (LibreOffice to PDF to images) and look at them. Check for: text running outside boxes, text under other shapes, leftover `[…]` prompts in places that should be filled, wrong owners, wrong dates.
@@ -135,7 +147,7 @@ When you add a detail slide:
 
 ## Checklist before you hand the file back
 
-- [ ] Only the named priority's section was changed (plus anything the person asked for).
+- [ ] The file contains only the named priority's slides, in master order. No other priorities, no template layouts.
 - [ ] Nothing was invented. Anything unknown is still a prompt.
 - [ ] Owners are consistent and appear once per slide (pill), not repeated in the body.
 - [ ] The Update slide says today's date in "Last updated".
