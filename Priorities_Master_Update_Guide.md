@@ -72,6 +72,17 @@ Do:
 - If only one slide changed, still return the whole section so the person can replace it in one go. Say in your message which slides changed or were added.
 - Do not include the overview slide, the template layouts or other priorities, unless the person asks for a change to them. In that case return those slides as a separate small file.
 
+### Where things live in the deck
+
+The deck has 11 PowerPoint sections:
+- **Overview and guide**: the overview, a how-to slide and a how-to-use-Claude slide (both hidden).
+- **One section per priority (8)**: divider, exec summary, Why now, How we're going about it, Adoption & change management, Update, then any detail slides (usually hidden) and a hidden **Images** slide for that priority. Capacity has extra detail slides.
+- **Core template slideware**: blank copies of the five standard slides (divider, exec summary, Why now, Adoption & change management, Update) and the 8 versions of "How we're going about it" (1 to 8 steps). Use these when a **new priority** is added: copy them into a new section.
+- **Detail slideware templates**: the hidden **Detail layout menu** slide first, then every supporting-detail layout.
+
+Do not edit anything in the two template sections. Copy from them.
+**Hidden slides stay hidden and visible slides stay visible.** Never change a slide's hidden state, including your own copies of a detail slide, unless the person asks.
+
 ### Start of every session
 
 1. Open the deck and list the sections (PowerPoint sections, one per priority; each starts at the divider slide).
@@ -135,10 +146,18 @@ The end of the deck holds blank layouts (visible, in the "Supporting-detail layo
 | Phases, dates and steps within them | **Phases and dates** |
 | One key statement with supporting points | **Statement and points** |
 | Goes in, what happens, comes out | **Flow** |
-| A photo with a headline on the left and up to five numbered points on the right (a feature or capability list) | **Split slide with numbered points** |
+| A photo with a headline on the left and up to five numbered points on the right (a feature or capability list) | **Split with points** |
 | A goes-in / what-happens / comes-out flow with a banner underneath for status or what is next | **Flow with banner** |
 | A question the slide answers, with up to eight topics to cover | **Prompt and topics** |
+| Six equal blocks with an image beside them and a takeaway (for example six workstreams) | **Six blocks and a takeaway** |
+| A headline, three cards and two wider cards (for example problem, need, why, then thoughts and next steps) | **Three cards and two wide** |
+| An image with two tall phase cards (for example phase 1 and phase 2) | **Image and two phases** |
+| A goal, three pillars each with a status, a short timeline and a takeaway | **Goal and three pillars** |
 | The "How we're going about it" slide with a different number of steps | **Approach · 1 to 8 steps** |
+
+To choose a layout fast, open the hidden **Detail layout menu** slide (first slide of the Detail slideware templates section). It lists each layout and what it is for.
+
+For any layout with an image (Split with points, Image and two phases, Six blocks and a takeaway, Goal and three pillars, Flow with banner), use **that priority's image** from its hidden **Images** slide. The Images slide shows the source image plus the crops used for the divider, header band, split image, update panel and banner.
 
 When you add a detail slide:
 - Prefer a library layout as it is, and fit the content into its boxes, shortening the wording if needed. How the detail is presented matters less than how it looks: the image, header and style must match the section (see above).
@@ -169,6 +188,7 @@ When you add a detail slide:
 - Prompts are italic grey text that begins with `[` (for example `[Put here: …]`). On the Play to Win slides (the Context and Update slides for Deal-to-Delivery, Accountability and Intake) a prompt may instead be **yellow-highlighted** text such as `[enter date]`. Treat both as placeholders. When you fill one, replace the whole bracketed text and remove the italic/grey formatting so the real text matches the surrounding text.
 - To duplicate a slide: create a new slide with the same layout, deep-copy every shape element from the source (including pictures, and re-relate each image part), then move the slide's id in `sldIdLst` to the right place in the section. Do not leave duplicate part names.
 - Do not add speaker notes.
+- A new priority is the same six slides plus a hidden Images slide. Copy the five blank slides and the right step-count slide from **Core template slideware** into a new section named after the priority, then fill them. Ask the person for the priority name, owners and which image to use. The image for a new priority must be chosen by the deck owner, so ask.
 - To list sections: parse `ppt/presentation.xml`, find `p14:sectionLst` (namespace `http://schemas.microsoft.com/office/powerpoint/2010/main`), and read each `p14:section` name and its `p14:sldId` ids; match the ids to `prs.slides` by `slide.slide_id`. python-pptx has no section API.
 - To delete a slide: remove its `p:sldId` from `prs.slides._sldIdLst` and drop the relationship (`prs.part.drop_rel(rId)`). Then drop the matching entries in the section list. Unused images are removed when the package is saved.
 - Placeholders must have left, top, width and height all set, or PowerPoint treats the missing ones as 0.
