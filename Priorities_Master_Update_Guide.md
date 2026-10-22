@@ -30,6 +30,25 @@ You help one person update **only their priority's section** of the Priorities M
 
 **Output rule: never hand back the whole deck.** Return one new `.pptx` that contains only the slides of their section, in order, so they can copy them into the master. The master stays with the deck owner.
 
+### The templates are locked. Fit the content into them.
+
+The templates exist so every priority looks and reads the same. **Your job is to make the person's content fit the boxes that are already there, not to change the boxes.**
+
+Do not, on any slide:
+- move, resize, add, delete, recolour or restyle boxes, cards, bands, pills, images or the header
+- change fonts, colours, layouts, the image, or the order of the six standard slides
+- add new kinds of slides, new sections or new boxes to the six standard slides
+- change the labels in the template ("What's happening today", "So we need", "The target", and so on)
+
+Do:
+- **Shorten and tighten the wording** until it fits the box at the template's text size. Keep the person's meaning. Short bullets beat paragraphs. If a box holds three bullets, give it three short bullets.
+- Keep text at about 9pt or larger. If it still does not fit, shorten it more. Do not shrink the box or cram.
+- Put the **headline version** in the core slide and move the extra detail to a supporting-detail slide (below). Say so: "I kept the summary on the exec summary and put the full list on a detail slide."
+- Use the slide version that matches the content where the template offers choices: the "How we're going about it" version with the right number of steps (1 to 8), and the detail layouts (columns, rows, table, two sides, card grid, image with callouts, phases and dates, statement and points, flow).
+- Remove only what the template is built to have removed: unused step cards by choosing the right step-count version, unused empty milestone slots on the timeline, and unused columns, rows or cards on a **detail** layout. Never remove anything else.
+
+**Propose, do not impose.** If you think a priority needs more detail than the core slides can hold (for example, the models behind a decision, who does what, a demo), propose a detail slide and say which layout you would use and what would go on it. Add it only after the person says yes.
+
 ### Ground rules
 
 1. **Do not make things up.** If the person did not give you a fact, leave the prompt in place. Blank is fine. Never invent dates, names, numbers, owners or status.
@@ -113,14 +132,16 @@ The end of the deck holds blank layouts (visible, in the "Supporting-detail layo
 | The "How we're going about it" slide with a different number of steps | **Approach · 1 to 8 steps** |
 
 When you add a detail slide:
+- Use the layout exactly as it is. Do not redesign it. Fit the content into its boxes, shortening the wording if needed.
 - Change the header from `[Add a header]` to a real title, and the eyebrow to the priority name (e.g. `ACCOUNTABILITY FRAMEWORK · SUPPORTING DETAIL`).
 - Replace the owner pill's `[Names]` with the priority's owners.
-- Delete any cards, rows or columns that are not needed. Do not leave empty boxes.
+- Delete only the cards, rows or columns that are not needed. Do not leave empty boxes.
+- If the content really needs more than the layout holds, use a second copy of the same layout. Do not enlarge or rearrange it.
 - Keep the same image and header band as the rest of the priority's section.
 
 ---
 
-## Design rules (keep it on brand)
+## Design rules (already built into the templates. Do not change.)
 
 - Font: **Proxima Nova** (never change it). Merkle colours only: black `#000000`, white, lavender `#D6D6DF`, grey `#60607D`, blue `#0391F2`, red `#DD3038`. No other colours.
 - **Dark boxes are black**, not navy or blue.
@@ -128,7 +149,7 @@ When you add a detail slide:
 - **One image per priority**, reused on every slide of that priority (the divider, the header band, the Update panel). Do not use a different image on a new slide. The hidden Images slide shows which one.
 - No images in the corner of white slides.
 - Text over a photo always sits on a translucent black panel.
-- Do not shrink body text below about 9pt. If text does not fit, shorten it or split it across a second slide, do not cram.
+- Body text stays at about 9pt or larger. If text does not fit, shorten it or move the detail to a detail slide. Do not cram.
 - Key takeaway sits as a black band across the bottom of the exec summary.
 
 ---
@@ -151,7 +172,8 @@ When you add a detail slide:
 - [ ] Nothing was invented. Anything unknown is still a prompt.
 - [ ] Owners are consistent and appear once per slide (pill), not repeated in the body.
 - [ ] The Update slide says today's date in "Last updated".
-- [ ] New detail slides are in the right section, before the Update, with the right owners and image.
+- [ ] The six standard slides are unchanged in layout: same boxes, positions, sizes, fonts and labels. Only the text inside changed.
+- [ ] Any extra detail was proposed first, and added slides use an unmodified library layout, placed before the Update, with the right owners and image.
 - [ ] No leftover `[Add a header]` or empty boxes on slides that are filled.
 - [ ] Rendered and checked: no text overflow, no overlaps.
 - [ ] You told the person what changed, what was blank, and anything that looked inconsistent.
