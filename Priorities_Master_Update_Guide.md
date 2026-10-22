@@ -135,6 +135,9 @@ The end of the deck holds blank layouts (visible, in the "Supporting-detail layo
 | Phases, dates and steps within them | **Phases and dates** |
 | One key statement with supporting points | **Statement and points** |
 | Goes in, what happens, comes out | **Flow** |
+| A photo with a headline on the left and up to five numbered points on the right (a feature or capability list) | **Split slide with numbered points** |
+| A goes-in / what-happens / comes-out flow with a banner underneath for status or what is next | **Flow with banner** |
+| A question the slide answers, with up to eight topics to cover | **Prompt and topics** |
 | The "How we're going about it" slide with a different number of steps | **Approach · 1 to 8 steps** |
 
 When you add a detail slide:
