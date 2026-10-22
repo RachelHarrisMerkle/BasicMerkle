@@ -42,7 +42,7 @@ Do not, on any slide:
 
 Do:
 - **Shorten and tighten the wording** until it fits the box at the template's text size. Keep the person's meaning. Short bullets beat paragraphs. If a box holds three bullets, give it three short bullets.
-- Keep text at about 9pt or larger. If it still does not fit, shorten it more. Do not shrink the box or cram.
+- Never make the text smaller than the template's own size. If it still does not fit, shorten it more. Do not shrink the box or cram.
 - Put the **headline version** in the core slide and move the extra detail to a supporting-detail slide (below). Say so: "I kept the summary on the exec summary and put the full list on a detail slide."
 - Use the slide version that matches the content where the template offers choices: the "How we're going about it" version with the right number of steps (1 to 8), and the detail layouts (columns, rows, table, two sides, card grid, image with callouts, phases and dates, statement and points, flow).
 - Remove only what the template is built to have removed: unused step cards by choosing the right step-count version, unused empty milestone slots on the timeline, and unused columns, rows or cards on a **detail** layout. Never remove anything else.
@@ -104,7 +104,8 @@ Also in each section (do not delete): a **hidden "Images" slide** at the end of 
 - **"How we measure success"**, not baseline or target. Do not add baselines or targets.
 - **No dependencies or risks in the click-downs.** They live on the Update slide under "What is in our way / what we need from you".
 - **Dates** live on the timeline of the "How we're going about it" slide. Do not repeat them elsewhere unless asked.
-- **Update goes last** in the section (before the hidden Images slide). Always set "Last updated" to today's date when the Update slide is changed.
+- **Update goes last** in the section (before the hidden Images slide).
+- **Always date the Update slide.** Any time you change anything on an Update slide, set the "Last updated" pill (left panel, above Owner(s)) to the date of the update, written like `Last updated: Oct 22, 2026`. Never leave `[date]` in place after an update. Use the date the person gives you. If they do not give one, use today's date from the system. If you cannot be sure of today's date, ask: "What date should I put on the Update slide?" This applies even when the only change is a typo.
 - **Stories** are not a separate slide any more. A story (1 to 5 per project, MVP vs after the MVP) is a step card on "How we're going about it". Label MVP vs after the MVP in the step names if needed.
 - **No source lines, no speaker notes, no small print.**
 - Statuses, if someone wants them, use plain words: Not started, In progress, Done, On hold. No red/yellow/green.
@@ -154,7 +155,7 @@ When you add a detail slide:
 - **One image per priority**, reused on every slide of that priority (the divider, the header band, the Update panel). Do not use a different image on a new slide. The hidden Images slide shows which one.
 - No images in the corner of white slides.
 - Text over a photo always sits on a translucent black panel.
-- Body text stays at about 9pt or larger. If text does not fit, shorten it or move the detail to a detail slide. Do not cram.
+- Keep the text size the template already uses and never go smaller than it. Some template boxes (for example long step cards) already use small text, so shorten the wording rather than shrinking it further. If it does not fit, move the detail to a detail slide. Do not cram.
 - Key takeaway sits as a black band across the bottom of the exec summary.
 
 ---
@@ -162,9 +163,11 @@ When you add a detail slide:
 ## Technical notes (for working with python-pptx)
 
 - The deck has PowerPoint **sections**: `p14:sectionLst` in `ppt/presentation.xml`. In the section file keep only one section (the priority). New slides must be in that section's `sldIdLst`. When deleting the other slides, also drop their relationships and parts so the file does not carry unused images.
-- Prompts are italic grey text that begins with `[` (for example `[Put here: …]`). When you fill one, replace the whole bracketed text and remove the italic/grey formatting so the real text matches the surrounding text.
+- Prompts are italic grey text that begins with `[` (for example `[Put here: …]`). On the Play to Win slides (the Context and Update slides for Deal-to-Delivery, Accountability and Intake) a prompt may instead be **yellow-highlighted** text such as `[enter date]`. Treat both as placeholders. When you fill one, replace the whole bracketed text and remove the italic/grey formatting so the real text matches the surrounding text.
 - To duplicate a slide: create a new slide with the same layout, deep-copy every shape element from the source (including pictures, and re-relate each image part), then move the slide's id in `sldIdLst` to the right place in the section. Do not leave duplicate part names.
 - Do not add speaker notes.
+- To list sections: parse `ppt/presentation.xml`, find `p14:sectionLst` (namespace `http://schemas.microsoft.com/office/powerpoint/2010/main`), and read each `p14:section` name and its `p14:sldId` ids; match the ids to `prs.slides` by `slide.slide_id`. python-pptx has no section API.
+- To delete a slide: remove its `p:sldId` from `prs.slides._sldIdLst` and drop the relationship (`prs.part.drop_rel(rId)`). Then drop the matching entries in the section list. Unused images are removed when the package is saved.
 - Placeholders must have left, top, width and height all set, or PowerPoint treats the missing ones as 0.
 - After editing, **render the slides** (LibreOffice to PDF to images) and look at them. Check for: text running outside boxes, text under other shapes, leftover `[…]` prompts in places that should be filled, wrong owners, wrong dates.
 - If you cannot edit the file directly, give the person the exact text for each slide, labelled by slide title and box name, ready to paste.
@@ -176,7 +179,7 @@ When you add a detail slide:
 - [ ] The file contains only the named priority's slides, in master order. No other priorities, no template layouts.
 - [ ] Nothing was invented. Anything unknown is still a prompt.
 - [ ] Owners are consistent and appear once per slide (pill), not repeated in the body.
-- [ ] The Update slide says today's date in "Last updated".
+- [ ] If the Update slide was touched at all, "Last updated" shows the real date (not `[date]`).
 - [ ] The six standard slides are unchanged in layout: same boxes, positions, sizes, fonts and labels. Only the text inside changed.
 - [ ] Any extra detail was proposed first. Added detail slides are placed before the Update, use a library layout where possible, and match the section exactly: same header image, owner pill, fonts and colours.
 - [ ] No leftover `[Add a header]` or empty boxes on slides that are filled.
