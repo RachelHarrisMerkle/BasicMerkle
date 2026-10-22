@@ -47,6 +47,11 @@ Do:
 - Use the slide version that matches the content where the template offers choices: the "How we're going about it" version with the right number of steps (1 to 8), and the detail layouts (columns, rows, table, two sides, card grid, image with callouts, phases and dates, statement and points, flow).
 - Remove only what the template is built to have removed: unused step cards by choosing the right step-count version, unused empty milestone slots on the timeline, and unused columns, rows or cards on a **detail** layout. Never remove anything else.
 
+**Detail slides are the exception.** The six standard slides are locked. Supporting-detail slides are flexible in *how the content is laid out*, but not in *how they look*:
+- First choice: copy a layout from the library below and fill it.
+- If none of them fits the content, you may arrange it differently, or use another slide layout from the master's own template. Avoid this when a library layout will do.
+- Whatever you build **must match the priority's section**: the same header band with that priority's one image (copy the header from another slide in the section), the same title and eyebrow style, the owner pill, Proxima Nova, Merkle colours only, black dark boxes, white cards with the same outline, black takeaway bands, no coloured accent lines, no corner images, no text over a photo without a translucent black panel. It should be impossible to tell it apart from the rest of the section.
+
 **Propose, do not impose.** If you think a priority needs more detail than the core slides can hold (for example, the models behind a decision, who does what, a demo), propose a detail slide and say which layout you would use and what would go on it. Add it only after the person says yes.
 
 ### Ground rules
@@ -132,11 +137,11 @@ The end of the deck holds blank layouts (visible, in the "Supporting-detail layo
 | The "How we're going about it" slide with a different number of steps | **Approach · 1 to 8 steps** |
 
 When you add a detail slide:
-- Use the layout exactly as it is. Do not redesign it. Fit the content into its boxes, shortening the wording if needed.
+- Prefer a library layout as it is, and fit the content into its boxes, shortening the wording if needed. How the detail is presented matters less than how it looks: the image, header and style must match the section (see above).
 - Change the header from `[Add a header]` to a real title, and the eyebrow to the priority name (e.g. `ACCOUNTABILITY FRAMEWORK · SUPPORTING DETAIL`).
 - Replace the owner pill's `[Names]` with the priority's owners.
 - Delete only the cards, rows or columns that are not needed. Do not leave empty boxes.
-- If the content really needs more than the layout holds, use a second copy of the same layout. Do not enlarge or rearrange it.
+- If the content needs more than one layout holds, use a second copy, or choose a different arrangement that keeps the same style.
 - Keep the same image and header band as the rest of the priority's section.
 
 ---
@@ -173,7 +178,7 @@ When you add a detail slide:
 - [ ] Owners are consistent and appear once per slide (pill), not repeated in the body.
 - [ ] The Update slide says today's date in "Last updated".
 - [ ] The six standard slides are unchanged in layout: same boxes, positions, sizes, fonts and labels. Only the text inside changed.
-- [ ] Any extra detail was proposed first, and added slides use an unmodified library layout, placed before the Update, with the right owners and image.
+- [ ] Any extra detail was proposed first. Added detail slides are placed before the Update, use a library layout where possible, and match the section exactly: same header image, owner pill, fonts and colours.
 - [ ] No leftover `[Add a header]` or empty boxes on slides that are filled.
 - [ ] Rendered and checked: no text overflow, no overlaps.
 - [ ] You told the person what changed, what was blank, and anything that looked inconsistent.
